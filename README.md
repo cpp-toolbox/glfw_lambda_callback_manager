@@ -10,3 +10,12 @@ Another solution is that in main.cpp you could create lambda functions which are
 Another thought is that maybe the lambdas could be defined in main(), but that provides a problem because we can't define c style functions inside of other c style functions, and so we can never make our callbacks use the lambdas because they would have to be defined outside of this function call, but then the lambdas would already be removed from the stack.
 
 This subproject provides a solution by encapsulating the lambdas in a class, and then providing class members which are regular c style functions which call the lambdas.
+
+## usage
+```cpp
+    std::function<void(unsigned int)> char_callback = [](unsigned int _) {};
+    std::function<void(int, int, int, int)> key_callback = [](int _, int _1, int _2, int _3) {};
+    std::function<void(double, double)> mouse_pos_callback = wrap_member_function(camera, &FPSCamera::mouse_callback);
+    std::function<void(int, int, int)> mouse_button_callback = [](int _, int _1, int _2) {};
+    GLFWLambdaCallbackManager glcm(window, char_callback, key_callback, mouse_pos_callback, mouse_button_callback);
+```
