@@ -13,9 +13,9 @@ This subproject provides a solution by encapsulating the lambdas in a class, and
 
 ## usage
 ```cpp
-    std::function<void(unsigned int)> char_callback = [](unsigned int _) {};
-    std::function<void(int, int, int, int)> key_callback = [](int _, int _1, int _2, int _3) {};
-    std::function<void(double, double)> mouse_pos_callback = [](double _, double _1) {};
-    std::function<void(int, int, int)> mouse_button_callback = [](int _, int _1, int _2) {};
-    GLFWLambdaCallbackManager glcm(window, char_callback, key_callback, mouse_pos_callback, mouse_button_callback);
+std::function<void(unsigned int)> char_callback = [](unsigned int codepoint) {};
+std::function<void(int, int, int, int)> key_callback = [](int key, int scancode, int action, int mods) {};
+std::function<void(double, double)> mouse_pos_callback = [](double xpos, double ypos) {};
+std::function<void(int, int, int)> mouse_button_callback = [](int button, int action, int mods) {};
+GLFWLambdaCallbackManager glcm(window.glfw_window, char_callback, key_callback, mouse_pos_callback, mouse_button_callback);
 ```
