@@ -17,6 +17,11 @@ GLFWLambdaCallbackManager::GLFWLambdaCallbackManager(GLFWwindow *window, CharCal
     glfwSetFramebufferSizeCallback(window, GLFWLambdaCallbackManager::frame_buffer_size_callback_wrapper);
 }
 
+void GLFWLambdaCallbackManager::set_cursor_pos_callback(CursorPosCallback cursor_pos_callback) {
+    cursor_pos_callback_ = cursor_pos_callback;
+    glfwSetCursorPosCallback(window_, GLFWLambdaCallbackManager::cursor_pos_callback_wrapper);
+}
+
 void GLFWLambdaCallbackManager::char_callback_wrapper(GLFWwindow *window, unsigned int codepoint) {
     GLFWLambdaCallbackManager *manager = static_cast<GLFWLambdaCallbackManager *>(glfwGetWindowUserPointer(window));
     if (manager && manager->char_callback_) {

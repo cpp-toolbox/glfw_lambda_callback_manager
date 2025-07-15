@@ -18,6 +18,8 @@ class GLFWLambdaCallbackManager {
     using MouseButtonCallback = std::function<void(int, int, int)>;
     using FrameBufferSizeCallback = std::function<void(int, int)>;
 
+    void set_cursor_pos_callback(CursorPosCallback cursor_pos_callback);
+
     GLFWLambdaCallbackManager(GLFWwindow *window, CharCallback char_callback, KeyCallback key_callback,
                               CursorPosCallback cursor_pos_callback, MouseButtonCallback mouse_button_callback,
                               FrameBufferSizeCallback frame_buffer_size_callback);
