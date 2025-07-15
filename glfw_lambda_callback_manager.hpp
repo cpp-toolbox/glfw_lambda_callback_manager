@@ -4,6 +4,15 @@
 #include <GLFW/glfw3.h>
 #include <functional>
 
+// NOTE: this exists as a way to pass things in easier instead of having a huge parameter list
+struct AllGLFWLambdaCallbacks {
+    std::function<void(unsigned int)> char_callback;
+    std::function<void(int, int, int, int)> key_callback;
+    std::function<void(double, double)> cursor_pos_callback;
+    std::function<void(int, int, int)> mouse_button_callback;
+    std::function<void(int, int)> frame_buffer_size_callback;
+};
+
 /**
  * @brief Allows you to specify glfw callbacks as c++ lambdas,
  * @description glfw only allows c-style function pointers to be bound to glfw,
@@ -18,11 +27,20 @@ class GLFWLambdaCallbackManager {
     using MouseButtonCallback = std::function<void(int, int, int)>;
     using FrameBufferSizeCallback = std::function<void(int, int)>;
 
+    void set_char_callback(CharCallback char_callback);
+    void set_key_callback(KeyCallback key_callback);
     void set_cursor_pos_callback(CursorPosCallback cursor_pos_callback);
+    void set_mouse_button_callback(MouseButtonCallback mouse_button_callback);
+    void set_frame_buffer_size_callback(FrameBufferSizeCallback frame_buffer_size_callback);
 
+    void set_all_callbacks(AllGLFWLambdaCallbacks all_callbacks);
+
+    GLFWLambdaCallbackManager(GLFWwindow *window);
     GLFWLambdaCallbackManager(GLFWwindow *window, CharCallback char_callback, KeyCallback key_callback,
                               CursorPosCallback cursor_pos_callback, MouseButtonCallback mouse_button_callback,
                               FrameBufferSizeCallback frame_buffer_size_callback);
+
+    void register_all_callbacks_with_glfw();
 
   private:
     static void char_callback_wrapper(GLFWwindow *window, unsigned int codepoint);
