@@ -10,6 +10,7 @@ struct AllGLFWLambdaCallbacks {
     std::function<void(int, int, int, int)> key_callback;
     std::function<void(double, double)> cursor_pos_callback;
     std::function<void(int, int, int)> mouse_button_callback;
+    std::function<void(double, double)> scroll_callback;
     std::function<void(int, int)> frame_buffer_size_callback;
 };
 
@@ -25,12 +26,14 @@ class GLFWLambdaCallbackManager {
     using KeyCallback = std::function<void(int, int, int, int)>;
     using CursorPosCallback = std::function<void(double, double)>;
     using MouseButtonCallback = std::function<void(int, int, int)>;
+    using ScrollCallback = std::function<void(double, double)>;
     using FrameBufferSizeCallback = std::function<void(int, int)>;
 
     void set_char_callback(CharCallback char_callback);
     void set_key_callback(KeyCallback key_callback);
     void set_cursor_pos_callback(CursorPosCallback cursor_pos_callback);
     void set_mouse_button_callback(MouseButtonCallback mouse_button_callback);
+    void set_scroll_callback(ScrollCallback scroll_callback);
     void set_frame_buffer_size_callback(FrameBufferSizeCallback frame_buffer_size_callback);
 
     void set_all_callbacks(AllGLFWLambdaCallbacks all_callbacks);
@@ -38,7 +41,7 @@ class GLFWLambdaCallbackManager {
     GLFWLambdaCallbackManager(GLFWwindow *window);
     GLFWLambdaCallbackManager(GLFWwindow *window, CharCallback char_callback, KeyCallback key_callback,
                               CursorPosCallback cursor_pos_callback, MouseButtonCallback mouse_button_callback,
-                              FrameBufferSizeCallback frame_buffer_size_callback);
+                              ScrollCallback scroll_callback, FrameBufferSizeCallback frame_buffer_size_callback);
 
     void register_all_callbacks_with_glfw();
 
@@ -47,6 +50,7 @@ class GLFWLambdaCallbackManager {
     static void key_callback_wrapper(GLFWwindow *window, int key, int scancode, int action, int mods);
     static void cursor_pos_callback_wrapper(GLFWwindow *window, double mouse_position_x, double mouse_position_y);
     static void mouse_button_callback_wrapper(GLFWwindow *window, int button, int action, int mods);
+    static void scroll_callback_wrapper(GLFWwindow *window, double x_offset, double y_offset);
     static void frame_buffer_size_callback_wrapper(GLFWwindow *window, int width, int height);
 
     GLFWwindow *window_;
@@ -54,6 +58,7 @@ class GLFWLambdaCallbackManager {
     KeyCallback key_callback_;
     CursorPosCallback cursor_pos_callback_;
     MouseButtonCallback mouse_button_callback_;
+    ScrollCallback scroll_callback_;
     FrameBufferSizeCallback frame_buffer_size_callback_;
 };
 
