@@ -4,6 +4,8 @@
 #include <GLFW/glfw3.h>
 #include <functional>
 
+#include "sbpt_generated_includes.hpp"
+
 // NOTE: this exists as a way to pass things in easier instead of having a huge parameter list
 struct AllGLFWLambdaCallbacks {
     std::function<void(unsigned int)> char_callback;
@@ -16,12 +18,21 @@ struct AllGLFWLambdaCallbacks {
 
 /**
  * @brief Allows you to specify glfw callbacks as c++ lambdas,
- * @description glfw only allows c-style function pointers to be bound to glfw,
- * this class allows you to get around this by wrapping the passed in std::functions
- * in methods which are c-style functions, and then passing those wrappers into glfw
+ *
+ * @details glfw only allows c-style function pointers to be bound to glfw, this class allows you to get around this by
+ * wrapping the passed in std::functions in methods which are c-style functions, and then passing those wrappers into
+ * glfw
+ *
+ * @note When this class gets constructed it stores itself into the glfw user pointer so that we can call the right
+ * callback
+ *
+ * @warn If you construct more than one object, then the first one will stop working, in the future maybe we can
+ * explicitly disallow this
  */
 class GLFWLambdaCallbackManager {
   public:
+    bool logging_enabled = false;
+
     using CharCallback = std::function<void(unsigned int)>;
     using KeyCallback = std::function<void(int, int, int, int)>;
     using CursorPosCallback = std::function<void(double, double)>;
