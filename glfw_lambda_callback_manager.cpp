@@ -64,7 +64,7 @@ void GLFWLambdaCallbackManager::set_all_callbacks(AllGLFWLambdaCallbacks all_cal
 
 void GLFWLambdaCallbackManager::char_callback_wrapper(GLFWwindow *window, unsigned int codepoint) {
     GLFWLambdaCallbackManager *manager = static_cast<GLFWLambdaCallbackManager *>(glfwGetWindowUserPointer(window));
-    LogSection _(global_logger, "char_callback_wrapper", manager->logging_enabled);
+    GlobalLogSection _("char_callback_wrapper", manager->logging_enabled);
     if (manager && manager->char_callback_) {
         manager->char_callback_(codepoint);
     }
@@ -72,7 +72,7 @@ void GLFWLambdaCallbackManager::char_callback_wrapper(GLFWwindow *window, unsign
 
 void GLFWLambdaCallbackManager::key_callback_wrapper(GLFWwindow *window, int key, int scancode, int action, int mods) {
     GLFWLambdaCallbackManager *manager = static_cast<GLFWLambdaCallbackManager *>(glfwGetWindowUserPointer(window));
-    LogSection _(global_logger, "key_callback_wrapper", manager->logging_enabled);
+    GlobalLogSection _("key_callback_wrapper", manager->logging_enabled);
     if (manager && manager->key_callback_) {
         manager->key_callback_(key, scancode, action, mods);
     }
@@ -81,7 +81,7 @@ void GLFWLambdaCallbackManager::key_callback_wrapper(GLFWwindow *window, int key
 void GLFWLambdaCallbackManager::cursor_pos_callback_wrapper(GLFWwindow *window, double mouse_position_x,
                                                             double mouse_position_y) {
     GLFWLambdaCallbackManager *manager = static_cast<GLFWLambdaCallbackManager *>(glfwGetWindowUserPointer(window));
-    LogSection _(global_logger, "cursor_pos_callback_wrapper", manager->logging_enabled);
+    GlobalLogSection _("cursor_pos_callback_wrapper", manager->logging_enabled);
     if (manager && manager->cursor_pos_callback_) {
         manager->cursor_pos_callback_(mouse_position_x, mouse_position_y);
     }
@@ -89,7 +89,7 @@ void GLFWLambdaCallbackManager::cursor_pos_callback_wrapper(GLFWwindow *window, 
 
 void GLFWLambdaCallbackManager::mouse_button_callback_wrapper(GLFWwindow *window, int button, int action, int mods) {
     GLFWLambdaCallbackManager *manager = static_cast<GLFWLambdaCallbackManager *>(glfwGetWindowUserPointer(window));
-    LogSection _(global_logger, "mouse_button_callback_wrapper", manager->logging_enabled);
+    GlobalLogSection _("mouse_button_callback_wrapper", manager->logging_enabled);
     if (manager && manager->mouse_button_callback_) {
         manager->mouse_button_callback_(button, action, mods);
     }
@@ -97,7 +97,7 @@ void GLFWLambdaCallbackManager::mouse_button_callback_wrapper(GLFWwindow *window
 
 void GLFWLambdaCallbackManager::scroll_callback_wrapper(GLFWwindow *window, double x_offset, double y_offset) {
     GLFWLambdaCallbackManager *manager = static_cast<GLFWLambdaCallbackManager *>(glfwGetWindowUserPointer(window));
-    LogSection _(global_logger, "scroll_callback_wrapper", manager->logging_enabled);
+    GlobalLogSection _("scroll_callback_wrapper", manager->logging_enabled);
     if (manager && manager->mouse_button_callback_) {
         manager->scroll_callback_(x_offset, y_offset);
     }
@@ -105,7 +105,7 @@ void GLFWLambdaCallbackManager::scroll_callback_wrapper(GLFWwindow *window, doub
 
 void GLFWLambdaCallbackManager::frame_buffer_size_callback_wrapper(GLFWwindow *window, int width, int height) {
     GLFWLambdaCallbackManager *manager = static_cast<GLFWLambdaCallbackManager *>(glfwGetWindowUserPointer(window));
-    LogSection _(global_logger, "frame_buffer_size_callback_wrapper", manager->logging_enabled);
+    GlobalLogSection _("frame_buffer_size_callback_wrapper", manager->logging_enabled);
     if (manager && manager->frame_buffer_size_callback_) {
         manager->frame_buffer_size_callback_(width, height);
     }
